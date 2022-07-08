@@ -13,7 +13,7 @@ lfp_preprocessing <- function(df){
            diagnosed_bp = case_when(diagnosed_bp == 1 ~ 1,
                                     TRUE ~ 0),
            medication_bp = case_when(medication_bp == 1 ~ 1,
-                                     TRUE ~ 0)) %>% 
+                                     TRUE ~ 0))  %>% 
     
     mutate(bmi_underweight = case_when(bmi > bmi_max ~ NA_real_,
                                        bmi < bmi_cutoff[1] ~ 1,
@@ -88,8 +88,8 @@ lfp_preprocessing <- function(df){
          
          # Dignosis: Yes, Treated: Yes, Blood pressure: out of range
          htn_diag_uncontr = case_when(diagnosed_bp == 0 | is.na(diagnosed_bp)  ~ NA_real_,
-                                      diagnosed_bp == 1 &  diaghtn == 1 ~ 1,
-                                      diagnosed_bp == 1 &  diaghtn == 0 ~ 0,
+                                      diagnosed_bp == 1 &  highbp == 1 ~ 1,
+                                      diagnosed_bp == 1 &  highbp == 0 ~ 0,
                                       TRUE ~ NA_real_),
          # Dignosis: Yes, Treated: Yes, Blood pressure: in range
          htn_diag_contr = 1 - htn_diag_uncontr
@@ -107,8 +107,8 @@ lfp_preprocessing <- function(df){
                                      dbp < dbppre_cutoff ~ 0,
                                      TRUE ~ NA_real_)
   ) %>% 
-    mutate(sex = case_when(sex == 1 ~ "male",
-                           sex == 2 ~ "female"),
+    mutate(sex = case_when(sex == 1 ~ "Male",
+                           sex == 2 ~ "Female"),
     
     education = case_when(education %in% c(1) ~ 10,
                           education %in% c(2,3) ~ 11,
@@ -116,7 +116,6 @@ lfp_preprocessing <- function(df){
                           education %in% c(5:9) ~ 13)
     
     ) %>% 
-    mutate(education = factor(education, levels=c(10,11,12,13),labels=c("No education","Primary","Secondary","Higher"))) %>% 
     mutate(employment = case_when(employment == 2 ~ 0,
                                   employment == 1 ~ 1,
                                   TRUE ~ NA_real_)) %>% 
@@ -144,7 +143,7 @@ lfp_preprocessing <- function(df){
                                                    TRUE ~ NA_character_)) %>% 
     # Education
     mutate_at(vars(education),function(x) case_when(x == 10 ~ "No education",
-                                                    x == 12 ~ "Primary",
+                                                    x == 11 ~ "Primary",
                                                     x == 12 ~ "Secondary",
                                                     x == 13 ~ "Higher",
                                                     TRUE ~ NA_character_)) %>% 
@@ -168,65 +167,92 @@ lfp_preprocessing <- function(df){
       eduyr = case_when(education == "No education" ~ 0,
                         TRUE ~ as.numeric(eduyr))
     ) %>% 
-    mutate(
-      htn_disease = case_when(is.na(htn_free) ~ NA_real_,
-                              htn_free == 1 ~ 0,
-                              htn_undiag_uncontr == 1 ~ 1,
-                              htn_diag_untreat == 1 ~ 1,
-                              htn_treat_uncontr == 1 ~ 1,
-                              htn_treat_contr == 1 ~ 1,
-                              TRUE ~ 0),
-
-      
-      htn_diagnosed = case_when(is.na(htn_free) ~ NA_real_,
-                                htn_free == 1 ~ 0,
-                                htn_undiag_uncontr == 1 ~ 0,
-                                htn_diag_untreat == 1 ~ 1,
-                                htn_treat_uncontr == 1 ~ 1,
-                                htn_treat_contr == 1 ~ 1,
-                                TRUE ~ 0
-      ),
-      htn_treated = case_when(is.na(htn_free) ~ NA_real_,
-                              htn_free == 1 ~ 0,
-                              htn_undiag_uncontr == 1 ~ 0,
-                              htn_diag_untreat == 1 ~ 0,
-                              htn_treat_uncontr == 1 ~ 1,
-                              htn_treat_contr == 1 ~ 1,
-                              TRUE ~ 0
-      ),
-      htn_controlled = case_when(is.na(htn_free) ~ NA_real_,
-                                 htn_free == 1 ~ 0,
-                                 htn_undiag_uncontr == 1 ~ 0,
-                                 htn_diag_untreat == 1 ~ 0,
-                                 htn_treat_uncontr == 1 ~ 0,
-                                 htn_treat_contr == 1 ~ 1,
-                                 TRUE ~ 0
-      ),
-
-      htn_diagnosed_in_dis = case_when(is.na(htn_free) ~ NA_real_,
-                                       htn_free == 1 ~ NA_real_,
-                                       htn_undiag_uncontr == 1 ~ 0,
-                                       htn_diag_untreat == 1 ~ 1,
-                                       htn_treat_uncontr == 1 ~ 1,
-                                       htn_treat_contr == 1 ~ 1,
-                                       TRUE ~ 0
-      ),
-      htn_treated_in_dis = case_when(is.na(htn_free) ~ NA_real_,
-                                     htn_free == 1 ~ NA_real_,
+    mutate(htn_disease = case_when(is.na(htn_free) ~ NA_real_,
+                                   htn_free == 1 ~ 0,
+                                   htn_undiag_uncontr == 1 ~ 1,
+                                   htn_diag_untreat == 1 ~ 1,
+                                   htn_treat_uncontr == 1 ~ 1,
+                                   htn_treat_contr == 1 ~ 1,
+                                   TRUE ~ 0),
+           
+           htn_diagnosed = case_when(is.na(htn_free) ~ NA_real_,
+                                     htn_free == 1 ~ 0,
                                      htn_undiag_uncontr == 1 ~ 0,
-                                     htn_diag_untreat == 1 ~ 0,
+                                     htn_diag_untreat == 1 ~ 1,
                                      htn_treat_uncontr == 1 ~ 1,
                                      htn_treat_contr == 1 ~ 1,
                                      TRUE ~ 0
-      ),
-      htn_controlled_in_dis = case_when(is.na(htn_free) ~ NA_real_,
-                                        htn_free == 1 ~ NA_real_,
-                                        htn_undiag_uncontr == 1 ~ 0,
-                                        htn_diag_untreat == 1 ~ 0,
-                                        htn_treat_uncontr == 1 ~ 0,
-                                        htn_treat_contr == 1 ~ 1,
-                                        TRUE ~ 0
-      )) %>% 
+           ),
+           htn_treated = case_when(is.na(htn_free) ~ NA_real_,
+                                   htn_free == 1 ~ 0,
+                                   htn_undiag_uncontr == 1 ~ 0,
+                                   htn_diag_untreat == 1 ~ 0,
+                                   htn_treat_uncontr == 1 ~ 1,
+                                   htn_treat_contr == 1 ~ 1,
+                                   TRUE ~ 0
+           ),
+           htn_controlled = case_when(is.na(htn_free) ~ NA_real_,
+                                      htn_free == 1 ~ 0,
+                                      htn_undiag_uncontr == 1 ~ 0,
+                                      htn_diag_untreat == 1 ~ 0,
+                                      htn_diag_uncontr == 1 ~ 0,
+                                      htn_diag_contr == 1 ~ 1,
+                                      TRUE ~ 0
+           ),
+           
+           htn_diagnosed_in_dis = case_when(is.na(htn_free) ~ NA_real_,
+                                            htn_free == 1 ~ NA_real_,
+                                            htn_undiag_uncontr == 1 ~ 0,
+                                            htn_diag_untreat == 1 ~ 1,
+                                            htn_treat_uncontr == 1 ~ 1,
+                                            htn_treat_contr == 1 ~ 1,
+                                            TRUE ~ 0
+           ),
+           htn_treated_in_dis = case_when(is.na(htn_free) ~ NA_real_,
+                                          htn_free == 1 ~ NA_real_,
+                                          htn_undiag_uncontr == 1 ~ 0,
+                                          htn_diag_untreat == 1 ~ 0,
+                                          htn_treat_uncontr == 1 ~ 1,
+                                          htn_treat_contr == 1 ~ 1,
+                                          TRUE ~ 0
+           ),
+           htn_controlled_in_dis = case_when(is.na(htn_free) ~ NA_real_,
+                                             htn_free == 1 ~ NA_real_,
+                                             htn_undiag_uncontr == 1 ~ 0,
+                                             htn_diag_untreat == 1 ~ 0,
+                                             htn_diag_uncontr == 1 ~ 0,
+                                             htn_diag_contr == 1 ~ 1,
+                                             TRUE ~ 0
+           )) %>% 
+    
+    mutate(bmi_category = case_when(bmi > bmi_max ~ NA_real_,
+                                    bmi >= bmi_cutoff[3] ~ 4,
+                                    bmi >= bmi_cutoff[2] ~ 3,
+                                    bmi >= bmi_cutoff[1] ~ 2,
+                                    bmi < bmi_cutoff[1] ~ 1,
+                                    TRUE ~ NA_real_),
+           
+           highwc = case_when(sex == "Female" & waistcircumference >= female_wc_cutoff ~ 1,
+                              sex == "Female" & waistcircumference < female_wc_cutoff ~ 0,
+                              sex == "Male" & waistcircumference >= male_wc_cutoff ~ 1,
+                              sex == "Male" & waistcircumference < male_wc_cutoff ~ 0,
+                              TRUE ~ NA_real_
+           ),
+           waist_hip = case_when(!is.na(hipcircumference) ~ waistcircumference/hipcircumference,
+                                 TRUE ~ NA_real_)
+    ) %>% 
+    
+    mutate(bmi_category = factor(bmi_category,levels=c(1:4),labels=c("Underweight","Normal","Overweight","Obese")),
+           highwhr = case_when(sex == "Female" & waist_hip >= female_whr_cutoff ~ 1,
+                               sex == "Female" & waist_hip < female_whr_cutoff ~ 0,
+                               sex == "Male" & waist_hip >= male_whr_cutoff ~ 1,
+                               sex == "Male" & waist_hip < male_whr_cutoff ~ 0,
+                               TRUE ~ NA_real_
+           )) %>% 
+    
+    mutate_at(vars(diagnosed_dm,medication_dm,
+                   diagnosed_bp,medication_bp),~case_when(is.na(.) ~ 0,
+                                                          TRUE ~ .)) %>% 
     return(.)
 }
 

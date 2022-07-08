@@ -28,7 +28,6 @@ individual <- haven::read_dta(paste0(path_lasi_data,"/AllstatesUTs/3_LASI_W1_Ind
                               col_select = na.omit(ind_variables$selected)) %>% 
   rename_with(~ ind_variables$new_var[which(ind_variables$selected == .x)], 
               .cols = ind_variables$selected) %>% 
-  
   left_join(biomarker,
             by="personid") %>% 
   lfp_preprocessing(.)

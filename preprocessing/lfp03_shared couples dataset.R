@@ -8,14 +8,14 @@ couples_df <- couples_ids %>%
               dplyr::select(state,residence,
                             sampleweight,
                             
-                            wealth, religion, caste,
+                            wealth, in_religion, in_caste,
                             
                             hhid,personid,
                             sbp,dbp,
                             diagnosed_bp,medication_bp,
                             waistcircumference,hipcircumference,
                             age, weight, height, bmi, 
-                            eduyr, education, smokeever,smokecurr, smokecount, alcohol, 
+                            eduyr, education, employment, smokeever,smokecurr, smokecount, alcohol, 
                             insurance, htn
               ) %>% 
               rename_at(vars(sbp:htn),~paste0("w_",.)),
@@ -23,6 +23,8 @@ couples_df <- couples_ids %>%
             by = c("hhid","wife"="personid")
             
   ) %>% 
+  mutate(wealth = as.character(wealth)) %>% 
+  rename(in_wealth = wealth) %>% 
   left_join(individual %>% 
               dplyr::select(
                 hhid,personid,
@@ -30,7 +32,7 @@ couples_df <- couples_ids %>%
                 diagnosed_bp,medication_bp,
                 waistcircumference,hipcircumference,
                 age, weight, height, bmi, 
-                eduyr, education, smokeever,smokecurr, smokecount, alcohol, 
+                eduyr, education, employment, smokeever,smokecurr, smokecount, alcohol, 
                 insurance, htn
               ) %>% 
               rename_at(vars(sbp:htn),~paste0("h_",.)),
@@ -44,3 +46,4 @@ couples_df %>%
   dplyr::filter(!is.na(w_age)& !is.na(h_age)) %>% 
 
 saveRDS(.,paste0(path_lasi_family_folder,"/working/LASI Couples.RDS"))
+

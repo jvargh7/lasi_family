@@ -29,11 +29,11 @@ cv_husband = cv_memberfile %>%
 
 
 bind_rows(cv_wife  %>% 
-            dplyr::select(strata,hhid,wife,husband),
+            dplyr::select(psu,hhid,wife,husband),
           cv_husband  %>% 
-            dplyr::select(strata,hhid,wife,husband)) %>% 
+            dplyr::select(psu,hhid,wife,husband)) %>% 
   distinct(hhid,wife,husband,.keep_all=TRUE) %>% 
-  dplyr::select(strata,hhid,wife,husband) %>% 
+  dplyr::select(psu,hhid,wife,husband) %>% 
   dplyr::filter(!wife %in% husband) %>%
   left_join(cv_memberfile %>% 
               dplyr::select(personid,age) %>% 
