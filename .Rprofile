@@ -2,7 +2,9 @@ require(tidyverse)
 require(haven)
 
 path_lasi_data <- "C:/Cloud/OneDrive - Emory University/data/LASI"
-path_lasi_family_folder <- "C:/Cloud/OneDrive - Emory University/Papers/India Family Clustering"
+# path_lasi_family_folder <- "C:/Cloud/OneDrive - Emory University/Papers/India Family Clustering"
+path_cascade_folder <- "C:/Cloud/OneDrive - Emory University/Papers/NFHS Diabetes Cascade"
+
 options(survey.adjust.domain.lonely=TRUE)
 options(survey.lonely.psu="adjust")
 

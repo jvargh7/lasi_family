@@ -1,3 +1,7 @@
+
+# ht002, ht003: Ever diagnosed for HTN, DM
+# ht002c, ht003c: Currently on medication for HTN, DM
+
 require(lubridate)
 lfp_preprocessing <- function(df){
   df %>% 
@@ -124,9 +128,9 @@ lfp_preprocessing <- function(df){
                    diagnosed_dm,medication_dm), function(x) case_when(x== 2 ~ 0,
                                                                       x == 1 ~ 1,
                                                                       TRUE ~ NA_real_)) %>% 
-    mutate(in_caste = case_when(caste == 5 ~ 4,
+    mutate(caste = case_when(caste == 5 ~ 4,
                              TRUE ~ as.numeric(caste)),
-           in_religion = case_when(religion == 2 ~ 12,
+           religion = case_when(religion == 2 ~ 12,
                                 religion == 3 ~ 13,
                                 TRUE ~ 14)) %>% 
     # BMI
@@ -136,19 +140,24 @@ lfp_preprocessing <- function(df){
     mutate_at(vars(waistcircumference,hipcircumference),function(x) case_when(x > 240 ~ NA_real_,
                                                                               TRUE ~ as.numeric(x))) %>% 
     # Caste
-    mutate_at(vars(in_caste),function(x) case_when(x == 1 ~ "Scheduled Caste",
+    
+    mutate(na_caste = case_when(is.na(caste) ~ 1,
+                                TRUE ~ 0)) %>% 
+    mutate_at(vars(caste),function(x) case_when(x == 1 ~ "Scheduled Caste",
                                                    x == 2 ~ "Scheduled Tribe",
                                                    x == 3 ~ "OBC",
                                                    x == 4 ~ "General",
-                                                   TRUE ~ NA_character_)) %>% 
+                                                   TRUE ~ "General")) %>% 
     # Education
+    mutate(na_education = case_when(is.na(education) ~ 1,
+                                TRUE ~ 0)) %>% 
     mutate_at(vars(education),function(x) case_when(x == 10 ~ "No education",
                                                     x == 11 ~ "Primary",
                                                     x == 12 ~ "Secondary",
                                                     x == 13 ~ "Higher",
-                                                    TRUE ~ NA_character_)) %>% 
+                                                    TRUE ~ "No education")) %>% 
     # Religion
-    mutate_at(vars(in_religion),function(x) case_when(x == 12 ~ "Hindu",
+    mutate_at(vars(religion),function(x) case_when(x == 12 ~ "Hindu",
                                                       x == 13 ~ "Muslim",
                                                       TRUE ~ "Other")) %>% 
     # insurance, alcohol
@@ -253,6 +262,11 @@ lfp_preprocessing <- function(df){
     mutate_at(vars(diagnosed_dm,medication_dm,
                    diagnosed_bp,medication_bp),~case_when(is.na(.) ~ 0,
                                                           TRUE ~ .)) %>% 
+    mutate(age_category = case_when(age %in% c(18:39) ~ 1,
+                                   age %in% c(40:64) ~ 2,
+                                   age >= 65 ~ 3,
+                                   TRUE ~ NA_real_),
+           age_category10 = cut(age,breaks=c(18,30,40,50,60,70,80,100),include.lowest=TRUE,right=TRUE)) %>% 
     return(.)
 }
 

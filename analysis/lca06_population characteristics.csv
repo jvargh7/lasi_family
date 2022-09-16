@@ -1,0 +1,97 @@
+residence,strata,variable,estimate,lci,uci,type,group,est_ci,n,stratification
+Rural,Analytic,bmi,21.6,21.5,21.7,Continuous,NA,"21.6 (21.5, 21.7)",43173,status
+Rural,Analytic,age,58.8,58.6,59,Continuous,NA,"58.8 (58.6, 59)",44483,status
+Rural,Excluded,age,59.9,59.1,60.7,Continuous,NA,"59.9 (59.1, 60.7)",2943,status
+Urban,Analytic,bmi,24.9,24.5,25.3,Continuous,NA,"24.9 (24.5, 25.3)",22884,status
+Urban,Analytic,age,57.9,57.4,58.4,Continuous,NA,"57.9 (57.4, 58.4)",24113,status
+Urban,Excluded,age,57.3,54.8,59.7,Continuous,NA,"57.3 (54.8, 59.7)",1857,status
+Rural,Analytic,highwc,37.7,36.7,38.8,Proportion,NA,"37.7 (36.7, 38.8)",43163,status
+Rural,Analytic,htn,42.4,41.5,43.4,Proportion,NA,"42.4 (41.5, 43.4)",44483,status
+Rural,Analytic,highbp,28.4,27.6,29.3,Proportion,NA,"28.4 (27.6, 29.3)",43568,status
+Rural,Analytic,diaghtn,41.9,40.3,43.4,Proportion,NA,"41.9 (40.3, 43.4)",10325,status
+Rural,Analytic,htn_disease,41.1,40.2,42,Proportion,NA,"41.1 (40.2, 42)",44483,status
+Rural,Analytic,htn_diagnosed,22.3,21.4,23.1,Proportion,NA,"22.3 (21.4, 23.1)",44483,status
+Rural,Analytic,htn_treated,13.9,13.3,14.6,Proportion,NA,"13.9 (13.3, 14.6)",44483,status
+Rural,Analytic,htn_controlled,7.6,7.1,8,Proportion,NA,"7.6 (7.1, 8)",44483,status
+Urban,Analytic,highwc,63.1,61.4,64.7,Proportion,NA,"63.1 (61.4, 64.7)",22873,status
+Urban,Analytic,htn,57.1,55,59.3,Proportion,NA,"57.1 (55, 59.3)",24113,status
+Urban,Analytic,highbp,34.3,32.2,36.4,Proportion,NA,"34.3 (32.2, 36.4)",23112,status
+Urban,Analytic,diaghtn,42.5,39.9,45.1,Proportion,NA,"42.5 (39.9, 45.1)",8078,status
+Urban,Analytic,htn_disease,52,49.7,54.4,Proportion,NA,"52 (49.7, 54.4)",24113,status
+Urban,Analytic,htn_diagnosed,33.8,32.3,35.3,Proportion,NA,"33.8 (32.3, 35.3)",24113,status
+Urban,Analytic,htn_treated,26.4,24.8,28,Proportion,NA,"26.4 (24.8, 28)",24113,status
+Urban,Analytic,htn_controlled,14.9,13.6,16.3,Proportion,NA,"14.9 (13.6, 16.3)",24113,status
+Rural,Analytic,sex,57.2,56.6,57.7,Grouped,Female,"57.2 (56.6, 57.7)",44483,status
+Rural,Analytic,sex,42.8,42.3,43.4,Grouped,Male,"42.8 (42.3, 43.4)",44483,status
+Rural,Excluded,sex,56.2,53.4,59,Grouped,Female,"56.2 (53.4, 59)",2943,status
+Rural,Excluded,sex,43.8,41,46.6,Grouped,Male,"43.8 (41, 46.6)",2943,status
+Urban,Analytic,sex,60.3,59.1,61.6,Grouped,Female,"60.3 (59.1, 61.6)",24113,status
+Urban,Analytic,sex,39.7,38.4,40.9,Grouped,Male,"39.7 (38.4, 40.9)",24113,status
+Urban,Excluded,sex,55.6,45.1,66.2,Grouped,Female,"55.6 (45.1, 66.2)",1857,status
+Urban,Excluded,sex,44.4,33.8,54.9,Grouped,Male,"44.4 (33.8, 54.9)",1857,status
+Rural,Analytic,age_category,2.6,2.4,2.8,Grouped,1,"2.6 (2.4, 2.8)",44483,status
+Rural,Analytic,age_category,64.6,63.8,65.5,Grouped,2,"64.6 (63.8, 65.5)",44483,status
+Rural,Analytic,age_category,32.8,32,33.6,Grouped,3,"32.8 (32, 33.6)",44483,status
+Rural,Excluded,age_category,2.2,1.6,2.9,Grouped,1,"2.2 (1.6, 2.9)",2943,status
+Rural,Excluded,age_category,62.3,59.4,65.1,Grouped,2,"62.3 (59.4, 65.1)",2943,status
+Rural,Excluded,age_category,35.5,32.6,38.4,Grouped,3,"35.5 (32.6, 38.4)",2943,status
+Urban,Analytic,age_category,3.4,2.4,4.4,Grouped,1,"3.4 (2.4, 4.4)",24113,status
+Urban,Analytic,age_category,66,64,68,Grouped,2,"66 (64, 68)",24113,status
+Urban,Analytic,age_category,30.6,28.8,32.4,Grouped,3,"30.6 (28.8, 32.4)",24113,status
+Urban,Excluded,age_category,4.3,2.6,6.1,Grouped,1,"4.3 (2.6, 6.1)",1857,status
+Urban,Excluded,age_category,67.3,58.2,76.4,Grouped,2,"67.3 (58.2, 76.4)",1857,status
+Urban,Excluded,age_category,28.4,18.9,37.8,Grouped,3,"28.4 (18.9, 37.8)",1857,status
+Rural,Analytic,education,4.7,4.3,5.1,Grouped,Higher,"4.7 (4.3, 5.1)",44483,status
+Rural,Analytic,education,70.5,69.4,71.6,Grouped,No education,"70.5 (69.4, 71.6)",44483,status
+Rural,Analytic,education,19.6,18.7,20.4,Grouped,Primary,"19.6 (18.7, 20.4)",44483,status
+Rural,Analytic,education,5.2,4.8,5.6,Grouped,Secondary,"5.2 (4.8, 5.6)",44483,status
+Rural,Excluded,education,4.8,3.7,6,Grouped,Higher,"4.8 (3.7, 6)",2943,status
+Rural,Excluded,education,73,70,75.9,Grouped,No education,"73 (70, 75.9)",2943,status
+Rural,Excluded,education,16.1,14,18.2,Grouped,Primary,"16.1 (14, 18.2)",2943,status
+Rural,Excluded,education,6.1,4.7,7.5,Grouped,Secondary,"6.1 (4.7, 7.5)",2943,status
+Urban,Analytic,education,22.3,16.6,28,Grouped,Higher,"22.3 (16.6, 28)",24113,status
+Urban,Analytic,education,38.4,33.4,43.3,Grouped,No education,"38.4 (33.4, 43.3)",24113,status
+Urban,Analytic,education,25.4,23.6,27.1,Grouped,Primary,"25.4 (23.6, 27.1)",24113,status
+Urban,Analytic,education,14,12.8,15.1,Grouped,Secondary,"14 (12.8, 15.1)",24113,status
+Urban,Excluded,education,24.7,19.4,30,Grouped,Higher,"24.7 (19.4, 30)",1857,status
+Urban,Excluded,education,36.3,26.6,45.9,Grouped,No education,"36.3 (26.6, 45.9)",1857,status
+Urban,Excluded,education,21.5,16.4,26.6,Grouped,Primary,"21.5 (16.4, 26.6)",1857,status
+Urban,Excluded,education,17.6,6.8,28.3,Grouped,Secondary,"17.6 (6.8, 28.3)",1857,status
+Rural,Analytic,caste,23,21.3,24.7,Grouped,General,"23 (21.3, 24.7)",44483,status
+Rural,Analytic,caste,44,41.9,46.2,Grouped,OBC,"44 (41.9, 46.2)",44483,status
+Rural,Analytic,caste,22.3,20.6,24,Grouped,Scheduled Caste,"22.3 (20.6, 24)",44483,status
+Rural,Analytic,caste,10.7,9.4,12,Grouped,Scheduled Tribe,"10.7 (9.4, 12)",44483,status
+Rural,Excluded,caste,22.3,19.4,25.3,Grouped,General,"22.3 (19.4, 25.3)",2943,status
+Rural,Excluded,caste,40.4,36.6,44.2,Grouped,OBC,"40.4 (36.6, 44.2)",2943,status
+Rural,Excluded,caste,22.1,19.2,25,Grouped,Scheduled Caste,"22.1 (19.2, 25)",2943,status
+Rural,Excluded,caste,15.2,12.1,18.3,Grouped,Scheduled Tribe,"15.2 (12.1, 18.3)",2943,status
+Urban,Analytic,caste,34.5,29.2,39.8,Grouped,General,"34.5 (29.2, 39.8)",24113,status
+Urban,Analytic,caste,49.4,42.8,56.1,Grouped,OBC,"49.4 (42.8, 56.1)",24113,status
+Urban,Analytic,caste,12.8,10.5,15.1,Grouped,Scheduled Caste,"12.8 (10.5, 15.1)",24113,status
+Urban,Analytic,caste,3.2,2.3,4.2,Grouped,Scheduled Tribe,"3.2 (2.3, 4.2)",24113,status
+Urban,Excluded,caste,41.1,33.6,48.5,Grouped,General,"41.1 (33.6, 48.5)",1857,status
+Urban,Excluded,caste,46.8,37.7,55.9,Grouped,OBC,"46.8 (37.7, 55.9)",1857,status
+Urban,Excluded,caste,8.5,5.6,11.4,Grouped,Scheduled Caste,"8.5 (5.6, 11.4)",1857,status
+Urban,Excluded,caste,3.6,1.2,6,Grouped,Scheduled Tribe,"3.6 (1.2, 6)",1857,status
+Rural,Analytic,religion,83.7,82,85.5,Grouped,Hindu,"83.7 (82, 85.5)",44483,status
+Rural,Analytic,religion,9.9,8.4,11.4,Grouped,Muslim,"9.9 (8.4, 11.4)",44483,status
+Rural,Analytic,religion,6.4,5.4,7.3,Grouped,Other,"6.4 (5.4, 7.3)",44483,status
+Rural,Excluded,religion,84.8,82.1,87.4,Grouped,Hindu,"84.8 (82.1, 87.4)",2943,status
+Rural,Excluded,religion,7.4,5.6,9.2,Grouped,Muslim,"7.4 (5.6, 9.2)",2943,status
+Rural,Excluded,religion,7.8,5.8,9.9,Grouped,Other,"7.8 (5.8, 9.9)",2943,status
+Urban,Analytic,religion,78.2,74.6,81.9,Grouped,Hindu,"78.2 (74.6, 81.9)",24113,status
+Urban,Analytic,religion,15.3,11.6,19.1,Grouped,Muslim,"15.3 (11.6, 19.1)",24113,status
+Urban,Analytic,religion,6.4,5.2,7.7,Grouped,Other,"6.4 (5.2, 7.7)",24113,status
+Urban,Excluded,religion,74.3,62.4,86.1,Grouped,Hindu,"74.3 (62.4, 86.1)",1857,status
+Urban,Excluded,religion,20.6,9.5,31.6,Grouped,Muslim,"20.6 (9.5, 31.6)",1857,status
+Urban,Excluded,religion,5.1,1.6,8.7,Grouped,Other,"5.1 (1.6, 8.7)",1857,status
+Rural,Analytic,bmi_category,24.9,24,25.8,Grouped,Underweight,"24.9 (24, 25.8)",43173,status
+Rural,Analytic,bmi_category,52.9,52.2,53.6,Grouped,Normal,"52.9 (52.2, 53.6)",43173,status
+Rural,Analytic,bmi_category,15.4,14.8,16.1,Grouped,Overweight,"15.4 (14.8, 16.1)",43173,status
+Rural,Analytic,bmi_category,3.9,3.6,4.3,Grouped,Obese,"3.9 (3.6, 4.3)",43173,status
+Rural,Analytic,bmi_category,2.8,2.6,3.1,Grouped,NA,"2.8 (2.6, 3.1)",43173,status
+Urban,Analytic,bmi_category,8.6,7.7,9.5,Grouped,Underweight,"8.6 (7.7, 9.5)",22884,status
+Urban,Analytic,bmi_category,41.3,37.5,45.1,Grouped,Normal,"41.3 (37.5, 45.1)",22884,status
+Urban,Analytic,bmi_category,29.4,26.8,32.1,Grouped,Overweight,"29.4 (26.8, 32.1)",22884,status
+Urban,Analytic,bmi_category,13.9,11.9,16,Grouped,Obese,"13.9 (11.9, 16)",22884,status
+Urban,Analytic,bmi_category,6.8,4.5,9,Grouped,NA,"6.8 (4.5, 9)",22884,status

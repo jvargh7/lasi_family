@@ -34,5 +34,5 @@ individual <- haven::read_dta(paste0(path_lasi_data,"/AllstatesUTs/3_LASI_W1_Ind
 
 
 
-saveRDS(individual,paste0(path_lasi_family_folder,"/working/lasi1_individual.RDS"))
+saveRDS(individual,paste0(path_cascade_folder,"/working/lasi1_individual.RDS"))
 
