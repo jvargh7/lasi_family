@@ -9,6 +9,8 @@ htn_disease,NA,"44.5 (43.3, 45.7)",NA
 htn_diagnosed,NA,"25.9 (25, 26.8)",NA
 htn_treated,NA,"17.8 (16.9, 18.8)",NA
 htn_controlled,NA,"9.9 (9.2, 10.6)",NA
+residence,Rural,"68.7 (64.8, 72.5)","62.3 (56.2, 68.5)"
+residence,Urban,"31.3 (27.5, 35.2)","37.7 (31.5, 43.8)"
 sex,Female,"58.2 (57.6, 58.8)","56 (51.7, 60.3)"
 sex,Male,"41.8 (41.2, 42.4)","44 (39.7, 48.3)"
 age_category,1,"2.9 (2.5, 3.2)","3 (2.3, 3.8)"

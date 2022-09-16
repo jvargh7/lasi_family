@@ -10,6 +10,10 @@ Analytic,htn_disease,44.5,43.3,45.7,Proportion,NA,"44.5 (43.3, 45.7)",68596,stat
 Analytic,htn_diagnosed,25.9,25,26.8,Proportion,NA,"25.9 (25, 26.8)",68596,status
 Analytic,htn_treated,17.8,16.9,18.8,Proportion,NA,"17.8 (16.9, 18.8)",68596,status
 Analytic,htn_controlled,9.9,9.2,10.6,Proportion,NA,"9.9 (9.2, 10.6)",68596,status
+Analytic,residence,68.7,64.8,72.5,Grouped,Rural,"68.7 (64.8, 72.5)",68596,status
+Analytic,residence,31.3,27.5,35.2,Grouped,Urban,"31.3 (27.5, 35.2)",68596,status
+Excluded,residence,62.3,56.2,68.5,Grouped,Rural,"62.3 (56.2, 68.5)",4800,status
+Excluded,residence,37.7,31.5,43.8,Grouped,Urban,"37.7 (31.5, 43.8)",4800,status
 Analytic,sex,58.2,57.6,58.8,Grouped,Female,"58.2 (57.6, 58.8)",68596,status
 Analytic,sex,41.8,41.2,42.4,Grouped,Male,"41.8 (41.2, 42.4)",68596,status
 Excluded,sex,56,51.7,60.3,Grouped,Female,"56 (51.7, 60.3)",4800,status
