@@ -102,23 +102,25 @@ lfp_preprocessing <- function(df){
     
     # Prediabetes and Prehypertension ------
   mutate(
-         prehypertension = case_when(diagnosed_bp == 1 ~ NA_real_,
-                                     is.na(sbp) | is.na(dbp) ~ NA_real_,
-                                     htn == 1 ~ 0,
-                                     sbp >= sbppre_cutoff & sbp < sbp_cutoff ~ 1,
-                                     dbp >= dbppre_cutoff & dbp < dbp_cutoff~ 1,
-                                     sbp < sbppre_cutoff ~ 0,
-                                     dbp < dbppre_cutoff ~ 0,
-                                     TRUE ~ NA_real_)
-  ) %>% 
+    prehypertension = case_when(diagnosed_bp == 1 ~ NA_real_,
+                                is.na(sbp) | is.na(dbp) ~ NA_real_,
+                                htn == 1 ~ 0,
+                                sbp >= sbppre_cutoff & sbp < sbp_cutoff ~ 1,
+                                dbp >= dbppre_cutoff & dbp < dbp_cutoff~ 1,
+                                sbp < sbppre_cutoff ~ 0,
+                                dbp < dbppre_cutoff ~ 0,
+                                TRUE ~ NA_real_)) %>% 
+   
     mutate(sex = case_when(sex == 1 ~ "Male",
                            sex == 2 ~ "Female"),
-    
-    education = case_when(education %in% c(1) ~ 10,
-                          education %in% c(2,3) ~ 11,
-                          education %in% c(4) ~ 12,
-                          education %in% c(5:9) ~ 13)
-    
+           
+           education = case_when(is.na(edulevel) ~ 10,
+                                 edulevel %in% c(1) ~ 10,
+                                 edulevel %in% c(2,3) ~ 11,
+                                 edulevel %in% c(4) ~ 12,
+                                 edulevel %in% c(5:9) ~ 13,
+                                 TRUE ~ NA_real_)
+           
     ) %>% 
     mutate(employment = case_when(employment == 2 ~ 0,
                                   employment == 1 ~ 1,
@@ -144,10 +146,10 @@ lfp_preprocessing <- function(df){
     mutate(na_caste = case_when(is.na(caste) ~ 1,
                                 TRUE ~ 0)) %>% 
     mutate_at(vars(caste),function(x) case_when(x == 1 ~ "Scheduled Caste",
-                                                   x == 2 ~ "Scheduled Tribe",
-                                                   x == 3 ~ "OBC",
-                                                   x == 4 ~ "General",
-                                                   TRUE ~ "General")) %>% 
+                                                x == 2 ~ "Scheduled Tribe",
+                                                x == 3 ~ "OBC",
+                                                x == 4 ~ "General",
+                                                TRUE ~ "General")) %>% 
     # Education
     mutate(na_education = case_when(is.na(education) ~ 1,
                                 TRUE ~ 0)) %>% 
@@ -266,7 +268,8 @@ lfp_preprocessing <- function(df){
                                    age %in% c(40:64) ~ 2,
                                    age >= 65 ~ 3,
                                    TRUE ~ NA_real_),
-           age_category10 = cut(age,breaks=c(18,30,40,50,60,70,80,100),include.lowest=TRUE,right=TRUE)) %>% 
+           age_category10 = cut(age,breaks=c(18,30,40,50,60,70,80,100),include.lowest=TRUE,right=FALSE),
+           age_category5 = cut(age,breaks=seq(15,100,by=5),include.lowest=TRUE,right=FALSE)) %>% 
     return(.)
 }
 

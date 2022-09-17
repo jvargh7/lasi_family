@@ -10,7 +10,7 @@ source("preprocessing/lfpre06_population characteristics.R")
 continuous_vars <- c("bmi","age")
 proportion_vars <- c("highwc","htn","highbp","diaghtn",
                      "htn_screened","htn_disease","htn_diagnosed","htn_treated","htn_controlled")
-grouped_vars <- c("residence","sex","age_category","age_category10","education",
+grouped_vars <- c("residence","sex","age_category","age_category5","age_category10","education",
                   "caste","religion","bmi_category")
 # "wealthq_ur",
 
