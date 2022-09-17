@@ -50,6 +50,6 @@ lasi_out <- left_join(lasi_sy,
 
 
 lasi_out %>% 
-  write_csv(.,file = "analysis/lca08_total population characteristics.csv")
+  write_csv(.,file = "analysis/lca10_total population characteristics.csv")
 
 

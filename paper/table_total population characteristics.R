@@ -1,4 +1,4 @@
-population_characteristics <- read_csv("analysis/lca08_total population characteristics.csv") %>% 
+population_characteristics <- read_csv("analysis/lca10_total population characteristics.csv") %>% 
   dplyr::select(strata,variable,group,est_ci)
 
 population_characteristics %>% 

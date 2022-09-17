@@ -9,8 +9,8 @@ lasipop_df <- readRDS(paste0(path_cascade_folder,"/working/lasi1_individual.RDS"
   # Should also excluded missing insurance and household consumption
   # They had data from Pilot wave as well
   mutate(status = case_when(is.na(sbp) | is.na(dbp) ~ "Excluded",
-                                 age < 45 ~ "Excluded",
-                                 na_education == 1 ~ "Excluded",
+                                 age < 45 ~ "Excluded 2",
+                                 na_education == 1 ~ "Excluded 2",
                                  TRUE ~ "Analytic"))
 
 lasipop_svydesign <- lasipop_df %>% 
