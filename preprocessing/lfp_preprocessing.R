@@ -53,13 +53,21 @@ lfp_preprocessing <- function(df){
              sbp < sbp_cutoff ~ 0,
              dbp < dbp_cutoff ~ 0,
              TRUE ~ NA_real_),
+           # Among those diagnosed, indicator of hypertension control status
            diaghtn = case_when(
+             diagnosed_bp == 0 ~ NA_real_,
              is.na(sbp) | is.na(dbp) ~ NA_real_,
-             diagnosed_bp == 1 & sbp >= sbp_cutoff ~ 1,
-             diagnosed_bp == 1 & dbp >= dbp_cutoff ~ 1,
-             diagnosed_bp == 1 & sbp < sbp_cutoff ~ 0,
-             diagnosed_bp == 1 & dbp < dbp_cutoff ~ 0,
-             TRUE ~ NA_real_),
+             diagnosed_bp == 1 & age <= agebp_cutoff & sbp > sbp_target[1] ~ 1,
+             diagnosed_bp == 1 & age <= agebp_cutoff & dbp > dbp_target[1] ~ 1,
+             diagnosed_bp == 1 & age <= agebp_cutoff & sbp <= sbp_target[1] ~ 0,
+             diagnosed_bp == 1 & age <= agebp_cutoff & dbp <= dbp_target[1] ~ 0,
+             
+             diagnosed_bp == 1 & age > agebp_cutoff & sbp > sbp_target[2] ~ 1,
+             diagnosed_bp == 1 & age > agebp_cutoff & dbp > dbp_target[2] ~ 1,
+             diagnosed_bp == 1 & age > agebp_cutoff & sbp <= sbp_target[2] ~ 0,
+             diagnosed_bp == 1 & age > agebp_cutoff & dbp <= dbp_target[2] ~ 0,
+             
+             TRUE ~ NA_real_)
     ) %>% 
     
   # Hypertension cascade -----
@@ -72,7 +80,7 @@ lfp_preprocessing <- function(df){
            htn == 1 ~ 0,
            htn == 0 ~ 1,
            TRUE ~ NA_real_),
-         htn_undiag_uncontr = case_when(diagnosed_bp == 1 | is.na(diagnosed_bp) ~ NA_real_,
+         htn_undiag_htn = case_when(diagnosed_bp == 1 | is.na(diagnosed_bp) ~ NA_real_,
                                         htn == 1 ~ 1,
                                         htn == 0 ~ 0,
                                         TRUE ~ NA_real_),
@@ -82,18 +90,18 @@ lfp_preprocessing <- function(df){
                                       diagnosed_bp == 1 & medication_bp == 0 ~ 1,
                                       TRUE ~ NA_real_),
          
-         # Dignosis: Yes, Treated: Yes, Blood pressure: out of range
+         # Dignosis: Yes, Treated: Yes, Blood pressure: out of control range
          htn_treat_uncontr = case_when(medication_bp == 0 | is.na(medication_bp)  ~ NA_real_,
-                                       diagnosed_bp == 1 & medication_bp == 1 & diaghtn == 1 ~ 1,
-                                       diagnosed_bp == 1 & medication_bp == 1 & diaghtn == 0 ~ 0,
+                                       medication_bp == 1 & diaghtn == 1 ~ 1,
+                                       medication_bp == 1 & diaghtn == 0 ~ 0,
                                        TRUE ~ NA_real_),
          # Dignosis: Yes, Treated: Yes, Blood pressure: in range
          htn_treat_contr = 1 - htn_treat_uncontr,
          
-         # Dignosis: Yes, Treated: Yes, Blood pressure: out of range
+         # Dignosis: Yes, Treated: Yes or No, Blood pressure: out of control range
          htn_diag_uncontr = case_when(diagnosed_bp == 0 | is.na(diagnosed_bp)  ~ NA_real_,
-                                      diagnosed_bp == 1 &  highbp == 1 ~ 1,
-                                      diagnosed_bp == 1 &  highbp == 0 ~ 0,
+                                      diaghtn == 1 ~ 1,
+                                      diaghtn == 0 ~ 0,
                                       TRUE ~ NA_real_),
          # Dignosis: Yes, Treated: Yes, Blood pressure: in range
          htn_diag_contr = 1 - htn_diag_uncontr
@@ -180,7 +188,7 @@ lfp_preprocessing <- function(df){
     ) %>% 
     mutate(htn_disease = case_when(is.na(htn_free) ~ NA_real_,
                                    htn_free == 1 ~ 0,
-                                   htn_undiag_uncontr == 1 ~ 1,
+                                   htn_undiag_htn == 1 ~ 1,
                                    htn_diag_untreat == 1 ~ 1,
                                    htn_treat_uncontr == 1 ~ 1,
                                    htn_treat_contr == 1 ~ 1,
@@ -188,7 +196,7 @@ lfp_preprocessing <- function(df){
            
            htn_diagnosed = case_when(is.na(htn_free) ~ NA_real_,
                                      htn_free == 1 ~ 0,
-                                     htn_undiag_uncontr == 1 ~ 0,
+                                     htn_undiag_htn == 1 ~ 0,
                                      htn_diag_untreat == 1 ~ 1,
                                      htn_treat_uncontr == 1 ~ 1,
                                      htn_treat_contr == 1 ~ 1,
@@ -196,7 +204,7 @@ lfp_preprocessing <- function(df){
            ),
            htn_treated = case_when(is.na(htn_free) ~ NA_real_,
                                    htn_free == 1 ~ 0,
-                                   htn_undiag_uncontr == 1 ~ 0,
+                                   htn_undiag_htn == 1 ~ 0,
                                    htn_diag_untreat == 1 ~ 0,
                                    htn_treat_uncontr == 1 ~ 1,
                                    htn_treat_contr == 1 ~ 1,
@@ -204,16 +212,16 @@ lfp_preprocessing <- function(df){
            ),
            htn_controlled = case_when(is.na(htn_free) ~ NA_real_,
                                       htn_free == 1 ~ 0,
-                                      htn_undiag_uncontr == 1 ~ 0,
+                                      htn_undiag_htn == 1 ~ 0,
+                                      htn_diag_contr == 1 ~ 1,
                                       htn_diag_untreat == 1 ~ 0,
                                       htn_diag_uncontr == 1 ~ 0,
-                                      htn_diag_contr == 1 ~ 1,
                                       TRUE ~ 0
            ),
            
            htn_diagnosed_in_dis = case_when(is.na(htn_free) ~ NA_real_,
                                             htn_free == 1 ~ NA_real_,
-                                            htn_undiag_uncontr == 1 ~ 0,
+                                            htn_undiag_htn == 1 ~ 0,
                                             htn_diag_untreat == 1 ~ 1,
                                             htn_treat_uncontr == 1 ~ 1,
                                             htn_treat_contr == 1 ~ 1,
@@ -221,7 +229,7 @@ lfp_preprocessing <- function(df){
            ),
            htn_treated_in_dis = case_when(is.na(htn_free) ~ NA_real_,
                                           htn_free == 1 ~ NA_real_,
-                                          htn_undiag_uncontr == 1 ~ 0,
+                                          htn_undiag_htn == 1 ~ 0,
                                           htn_diag_untreat == 1 ~ 0,
                                           htn_treat_uncontr == 1 ~ 1,
                                           htn_treat_contr == 1 ~ 1,
@@ -229,10 +237,10 @@ lfp_preprocessing <- function(df){
            ),
            htn_controlled_in_dis = case_when(is.na(htn_free) ~ NA_real_,
                                              htn_free == 1 ~ NA_real_,
-                                             htn_undiag_uncontr == 1 ~ 0,
+                                             htn_undiag_htn == 1 ~ 0,
+                                             htn_diag_contr == 1 ~ 1,
                                              htn_diag_untreat == 1 ~ 0,
                                              htn_diag_uncontr == 1 ~ 0,
-                                             htn_diag_contr == 1 ~ 1,
                                              TRUE ~ 0
            )) %>% 
     

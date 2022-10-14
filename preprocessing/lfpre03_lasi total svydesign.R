@@ -1,7 +1,7 @@
 
 # This is as per Hypertension cascade dashboard study 
 lasi_df <- readRDS(paste0(path_cascade_folder,"/working/lasi1_individual.RDS")) %>%
-  dplyr::filter(!is.na(htn_free)) %>%
+  dplyr::filter(!is.na(htn_free),age>=45) %>%
   mutate(residence = case_when(residence == 2 ~ "Urban",
                                residence == 1 ~ "Rural")) 
 

@@ -7,11 +7,11 @@ Excluded 2,age,40.2,40,40.4,Continuous,NA,"40.2 (40, 40.4)",6197,status
 Analytic,highwc,43.9,42.6,45.2,Proportion,NA,"43.9 (42.6, 45.2)",59831,status
 Analytic,htn,47,45.9,48.1,Proportion,NA,"47 (45.9, 48.1)",60483,status
 Analytic,highbp,31.5,30.6,32.3,Proportion,NA,"31.5 (30.6, 32.3)",60483,status
-Analytic,diaghtn,42.8,41.4,44.3,Proportion,NA,"42.8 (41.4, 44.3)",17442,status
+Analytic,diaghtn,40.7,39.4,42.1,Proportion,NA,"40.7 (39.4, 42.1)",17442,status
 Analytic,htn_disease,47,45.9,48.1,Proportion,NA,"47 (45.9, 48.1)",60483,status
 Analytic,htn_diagnosed,27.1,26.1,28.2,Proportion,NA,"27.1 (26.1, 28.2)",60483,status
 Analytic,htn_treated,19.6,18.5,20.7,Proportion,NA,"19.6 (18.5, 20.7)",60483,status
-Analytic,htn_controlled,10.8,10,11.6,Proportion,NA,"10.8 (10, 11.6)",60483,status
+Analytic,htn_controlled,16.1,15.3,16.9,Proportion,NA,"16.1 (15.3, 16.9)",60483,status
 Excluded,htn,100,100,100,Proportion,NA,"100 (100, 100)",1916,status
 Excluded,htn_disease,20.5,15.1,25.9,Proportion,NA,"20.5 (15.1, 25.9)",1916,status
 Excluded,htn_diagnosed,20.5,15.1,25.9,Proportion,NA,"20.5 (15.1, 25.9)",1916,status
@@ -20,11 +20,11 @@ Excluded,htn_controlled,0,0,0,Proportion,NA,"0 (0, 0)",1916,status
 Excluded 2,highwc,61.3,58.6,64,Proportion,NA,"61.3 (58.6, 64)",6180,status
 Excluded 2,htn,27.6,23.7,31.5,Proportion,NA,"27.6 (23.7, 31.5)",6197,status
 Excluded 2,highbp,17.1,13,21.2,Proportion,NA,"17.1 (13, 21.2)",6197,status
-Excluded 2,diaghtn,28.8,24.2,33.3,Proportion,NA,"28.8 (24.2, 33.3)",961,status
+Excluded 2,diaghtn,27.4,22.9,32,Proportion,NA,"27.4 (22.9, 32)",961,status
 Excluded 2,htn_disease,27.6,23.7,31.5,Proportion,NA,"27.6 (23.7, 31.5)",6197,status
 Excluded 2,htn_diagnosed,14.8,13.1,16.4,Proportion,NA,"14.8 (13.1, 16.4)",6197,status
 Excluded 2,htn_treated,6.7,5.7,7.7,Proportion,NA,"6.7 (5.7, 7.7)",6197,status
-Excluded 2,htn_controlled,4.2,3.5,4.9,Proportion,NA,"4.2 (3.5, 4.9)",6197,status
+Excluded 2,htn_controlled,10.7,9.4,12,Proportion,NA,"10.7 (9.4, 12)",6197,status
 Analytic,residence,69.9,66.1,73.6,Grouped,Rural,"69.9 (66.1, 73.6)",60483,status
 Analytic,residence,30.1,26.4,33.9,Grouped,Urban,"30.1 (26.4, 33.9)",60483,status
 Excluded,residence,56.8,49.4,64.3,Grouped,Rural,"56.8 (49.4, 64.3)",6716,status
